@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environments
+.venv/
+.env
+
+# VS Code
+.vscode/
+
+# Flask / Instance
+instance/
+
+# DB files
+*.db
+*.sqlite3
+
+# Migrations artifacts
+migrations/versions/*.pyc
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store

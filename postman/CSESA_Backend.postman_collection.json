@@ -1,0 +1,145 @@
+{
+  "info": {
+    "name": "CSESA Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Admin Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/admin/login", "host": ["{{baseUrl}}"], "path": ["admin", "login"] },
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@csesa.in\",\n  \"password\": \"admin123\"\n}" }
+      }
+    },
+    {
+      "name": "Members - List",
+      "request": { "method": "GET", "url": "{{baseUrl}}/members" }
+    },
+    {
+      "name": "Members - List by Category",
+      "request": { "method": "GET", "url": "{{baseUrl}}/members?category=Development" }
+    },
+    {
+      "name": "Members - Categories",
+      "request": { "method": "GET", "url": "{{baseUrl}}/members/categories" }
+    },
+    {
+      "name": "Members - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/members",
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Jane Doe\",\n  \"photo_url\": \"https://example.com/photo.jpg\",\n  \"role\": \"President\",\n  \"division\": \"TECSE\",\n  \"order\": 1,\n  \"year\": \"2025-26\"\n}" }
+      }
+    },
+    {
+      "name": "Members - Update (admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/members/1",
+        "body": { "mode": "raw", "raw": "{\n  \"division\": \"SECSE\",\n  \"order\": 2\n}" }
+      }
+    },
+    {
+      "name": "Members - By Year",
+      "request": { "method": "GET", "url": "{{baseUrl}}/members/by-year" }
+    },
+    {
+      "name": "Members - Years",
+      "request": { "method": "GET", "url": "{{baseUrl}}/members/years" }
+    },
+    {
+      "name": "Members - Bulk Import (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/members/bulk",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"mode\": \"replace\",\n  \"data\": {\n    \"2025-26\": [\n      { \"name\": \"Shivani Satish Mali\", \"role\": \"President\", \"image\": \"/api/placeholder/200/240\", \"order\": 1, \"division\": \"TECSE\" },\n      { \"name\": \"Mrunal Mahesh Gadavi\", \"role\": \"Vice President\", \"image\": \"/api/placeholder/200/240\", \"order\": 2, \"division\": \"TECSE\" }\n    ]\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Members - Delete (admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": "{{baseUrl}}/members/1"
+      }
+    },
+    {
+      "name": "Events - List Upcoming",
+      "request": { "method": "GET", "url": "{{baseUrl}}/events?status=upcoming" }
+    },
+    {
+      "name": "Events - Create (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/events",
+        "body": { "mode": "raw", "raw": "{\n  \"title\": \"Hackathon\",\n  \"venue\": \"Auditorium\",\n  \"rulebook_url\": \"https://example.com/rulebook.pdf\"\n}" }
+      }
+    },
+    {
+      "name": "Registration - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "url": "{{baseUrl}}/registration",
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Alex\",\n  \"email\": \"alex@example.com\",\n  \"team_name\": \"Team A\",\n  \"event_id\": 1\n}" }
+      }
+    },
+    {
+      "name": "Payment - Create Order",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "url": "{{baseUrl}}/payment/create-order",
+        "body": { "mode": "raw", "raw": "{\n  \"amount\": 10000,\n  \"registration_id\": 1\n}" }
+      }
+    },
+    {
+      "name": "Payment - Verify",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "url": "{{baseUrl}}/payment/verify",
+        "body": { "mode": "raw", "raw": "{\n  \"razorpay_order_id\": \"order_abc\",\n  \"razorpay_payment_id\": \"pay_abc\",\n  \"razorpay_signature\": \"sig_abc\"\n}" }
+      }
+    },
+    {
+      "name": "Email - Send (admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/email/send",
+        "body": { "mode": "raw", "raw": "{\n  \"to\": \"user@example.com\",\n  \"subject\": \"Hello\",\n  \"body\": \"Welcome!\"\n}" }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "" }
+  ]
+}
