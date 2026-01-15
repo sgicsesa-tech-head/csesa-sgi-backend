@@ -4,10 +4,11 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 from extensions import db, migrate, jwt
 
+# LOAD ENV FIRST
+load_dotenv()
 
 def create_app():
     """Application factory for the CSESA backend."""
-    load_dotenv()
     app = Flask(__name__)
     app.config.from_object('config.Config')
 
@@ -18,7 +19,7 @@ def create_app():
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     # Import models so Alembic discovers them
-    from models import admin, blog, event, member, payment, registration  # noqa: F401
+    from models import admin, blog, event, member, payment, registration  # noqa
 
     # Blueprints
     from routes.admin import admin_bp
